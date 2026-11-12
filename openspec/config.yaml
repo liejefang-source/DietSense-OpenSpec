@@ -1,0 +1,5 @@
+schema: spec-driven
+context: |
+  DietSense is a Traditional Chinese dietary logging proposal.
+  Evidence must be traceable. Numeric estimates use deterministic arithmetic.
+  All evaluation figures are targets, not observed results.
