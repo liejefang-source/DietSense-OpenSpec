@@ -1,0 +1,23 @@
+name: OpenSpec validation
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install official OpenSpec CLI
+        run: npm install --global @fission-ai/openspec@latest
+      - name: Record version and validate
+        env:
+          CI: 'true'
+        run: |
+          openspec --version
+          openspec validate refactor-dietsense --strict
