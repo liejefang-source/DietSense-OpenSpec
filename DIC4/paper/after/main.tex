@@ -1,0 +1,27 @@
+\documentclass[11pt]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\title{DietSense: Traceable Nutrient Estimation for Taiwanese Takeout Meals}
+\author{DietSense Project}
+\date{DIC4 proposal / after}
+\begin{document}
+\maketitle
+\begin{abstract}
+Logging Taiwanese takeout meals requires translating everyday descriptions into edible quantities. A phrase such as half a lunch box leaves the weight of the rice and the amount of added oil unresolved. We propose DietSense, a Traditional Chinese dialogue system that retains the assumptions behind each estimate. A language model extracts foods, a retriever selects compatible composition records, and deterministic arithmetic converts portions into nutrient totals. We plan a 500-case benchmark and a seven-day usability study with 20 participants. Prospective targets are over 85 percent of eligible cases within 20 percent of reference energy, a 60 percent reduction in logging time against manual lookup, and a System Usability Scale score above 70.\end{abstract}
+\section{Introduction}
+Two diners may both report braised pork with half the rice while consuming different amounts. Finding a matching food record does little to resolve the original serving size. A single calorie total hides which assumption the diner should correct.
+
+DietSense records food identity and portion separately. It retrieves candidates with compatible preparation states and asks at most two questions about high-impact unknowns. Given edible weight $w$ grams and density $d$ kcal per 100 g, energy is $wd/100$. Nonnegative endpoint products bound estimates under the stated portion and density assumptions. When inputs remain insufficient, the entry stays pending.
+
+We ask whether clarification and source tracking can improve estimates while reducing logging time. Related recipes stay together when allocating 100 development, 100 validation and 300 test cases. Reference values retain their origin: weighed ingredients, package labels or documented recipe calculations. Manual lookup, a language model alone and the full workflow receive the same held-out meals. To measure Acc20 we count all positive-reference test cases in the denominator; unresolved cases count as misses. Zero-energy cases receive a separate absolute-error analysis. We report mean absolute error on completed estimates alongside completion, range coverage and width. Removing retrieval or clarification in turn tests their contributions. In the usability study, participants perform matched tasks in counterbalanced order; outcomes include completion, elapsed time and SUS. These protocols and thresholds await empirical testing.
+\section{Related Work}
+NutriBench studies nutrient estimation from natural-language meal descriptions [1]. It motivates a text-based benchmark. DietSense asks what clarification adds when the initial text omits portions or mixes ingredients from a local recipe.
+
+Retrieval-augmented generation conditions generation on external evidence [2]. In dietary logging, a plausible text match can still pair a cooked serving with a raw ingredient. Taiwan food composition data [3] and USDA FoodData Central [4] provide candidate nutrient densities. Neither source determines the weight a particular diner consumed. Recording preparation state, units, source identifier and dataset version allows a reader to distinguish a retrieval error from an incorrect serving assumption.
+\section*{References}
+\small
+[1] Dhaliwal et al. NutriBench. ICLR, 2025. \par
+[2] Lewis et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS, 2020. \par
+[3] Taiwan Food and Drug Administration. Food composition dataset. \url{https://data.gov.tw/dataset/8543}\par
+[4] USDA. FoodData Central API Guide. \url{https://fdc.nal.usda.gov/api-guide/}
+\end{document}

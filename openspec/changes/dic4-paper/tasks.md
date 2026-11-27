@@ -1,0 +1,4 @@
+- [x] 建立英文初稿與修訂稿
+- [x] 完成 A–F 對照
+- [x] 從兩版 LaTeX 以 Pandoc 與 LibreOffice 匯出 PDF
+- [ ] 於 Overleaf 實測 MCP 讀寫與編譯
